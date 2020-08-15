@@ -29,6 +29,11 @@ const ExerciseSchema = new Schema({
 
 })
 
+ExerciseSchema.methods.totalDuration = function() {
+    totalDuration = this.firstName + " " + this.lastName;
+    return this.fullName;
+  }
+
 const Workout = mongoose.model("Workout", ExerciseSchema)
 
 module.exports = Workout;
