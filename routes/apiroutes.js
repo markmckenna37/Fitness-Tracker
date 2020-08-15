@@ -33,6 +33,25 @@ app.get("/api/workouts", (req, res) => {
         res.status(400).json(err)
     });
 });
+app.post("/api/stats", ({body}, res) => {
+    db.Workout.insertMany(body)
+      .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { workout: _id } }, { new: true }))
+      .then(dbStats => {
+        res.json(dbStats);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
+app.get("/api/stats", (req, res) => {
+    db.Workout.find({})
+    .then(dbStats => {
+        res.json(dbStats);
+    })
+    .catch(err => {
+        res.status(400).json(err)
+    });
+});
 
 
 
