@@ -1,7 +1,9 @@
+//Requiring modules
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+//Setting our exercise Schema. a day, and an array of exercise attributes
 const ExerciseSchema = new Schema({
     day: {
         type: Date,
@@ -36,11 +38,13 @@ const ExerciseSchema = new Schema({
         }
     }]
 }, {
+    // including our virtual for total exercise duration.
     toJSON: {
         virtuals: true
     }
 })
 
+//Virtual for setting total exercise duration.
 ExerciseSchema.virtual("totalDuration").
 get(function () {
     let totalDuration = 0;
